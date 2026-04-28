@@ -81,8 +81,8 @@ graph TD
     
     G -- Não --> P[Teste E2E Completo]
     
-    P --> Q[Registrar Métricas (Latência, Status: UP)]
-    O --> R[Registrar Falha (Erro, Status: DOWN)]
+    P --> Q["Registrar Métricas (Latência, Status: UP)"]
+    O --> R["Registrar Falha (Erro, Status: DOWN)"]
     
     Q --> S([Salvar MonitorLog no Banco e Atualizar Dashboard])
     R --> S
