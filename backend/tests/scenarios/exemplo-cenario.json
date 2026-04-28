@@ -1,5 +1,5 @@
 {
-  "name": "Fluxo Completo de Registro",
+  "name": "Fluxo de Login Automacao",
   "config": {
     "screenshotEnabled": true,
     "screenshotInterval": 500
@@ -9,7 +9,7 @@
       "id": "inicio",
       "type": "goto",
       "params": {
-        "url": "https://slotpixpay.io",
+        "url": "https://practicetestautomation.com/practice-test-login/",
         "waitUntil": "domcontentloaded"
       }
     },
@@ -28,31 +28,16 @@
       }
     },
     {
-      "id": "clicar-registrar",
-      "type": "click",
-      "params": {
-        "selector": "a#cadastroBtn2",
-        "timeout": 5000
-      }
-    },
-    {
-      "id": "aguardar-formulario",
-      "type": "wait",
-      "params": {
-        "timeout": 1500
-      }
-    },
-    {
-      "id": "preencher-telefone",
+      "id": "preencher-usuario",
       "type": "type",
       "params": {
-        "selector": "input[name='telefone']",
-        "text": "00953653321",
+        "selector": "input#username",
+        "text": "student",
         "timeout": 5000
       }
     },
     {
-      "id": "aguardar-campo",
+      "id": "aguardar-campo1",
       "type": "wait",
       "params": {
         "timeout": 500
@@ -62,8 +47,8 @@
       "id": "preencher-senha",
       "type": "type",
       "params": {
-        "selector": "input[type='password']",
-        "text": "Senha123!@#",
+        "selector": "input#password",
+        "text": "Password123",
         "timeout": 5000
       }
     },
@@ -85,7 +70,7 @@
       "id": "enviar-formulario",
       "type": "click",
       "params": {
-        "selector": "button[type=\"submit\"], button:has-text(\"Cadastrar\"), button:has-text(\"Registrar\")",
+        "selector": "button#submit",
         "timeout": 5000
       }
     },
