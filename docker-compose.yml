@@ -1,0 +1,52 @@
+services:
+  web:
+    image: node:20-alpine
+    container_name: frontend-web-mkt
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "5173:5173"
+    environment:
+    - CHOKIDAR_USEPOLLING=true
+    - WATCHPACK_POLLING=true
+    env_file:
+      - .env
+    command: sh -c "npm i && npm run dev -- --host 0.0.0.0"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  api:
+    build: ./backend
+    container_name: express-api-mkt
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-db-mkt
+    env_file:
+      - ./backend/.env
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "user", "-ppassword"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+volumes:
+  mysql-data:

@@ -1,0 +1,107 @@
+{
+  "name": "Fluxo Completo de Registro",
+  "config": {
+    "screenshotEnabled": true,
+    "screenshotInterval": 500
+  },
+  "blocks": [
+    {
+      "id": "inicio",
+      "type": "goto",
+      "params": {
+        "url": "https://slotpixpay.io",
+        "waitUntil": "domcontentloaded"
+      }
+    },
+    {
+      "id": "aguardar-carregamento",
+      "type": "wait",
+      "params": {
+        "timeout": 1000
+      }
+    },
+    {
+      "id": "captura-inicial",
+      "type": "screenshot",
+      "params": {
+        "name": "01-pagina-inicial"
+      }
+    },
+    {
+      "id": "clicar-registrar",
+      "type": "click",
+      "params": {
+        "selector": "a#cadastroBtn2",
+        "timeout": 5000
+      }
+    },
+    {
+      "id": "aguardar-formulario",
+      "type": "wait",
+      "params": {
+        "timeout": 1500
+      }
+    },
+    {
+      "id": "preencher-telefone",
+      "type": "type",
+      "params": {
+        "selector": "input[name='telefone']",
+        "text": "00953653321",
+        "timeout": 5000
+      }
+    },
+    {
+      "id": "aguardar-campo",
+      "type": "wait",
+      "params": {
+        "timeout": 500
+      }
+    },
+    {
+      "id": "preencher-senha",
+      "type": "type",
+      "params": {
+        "selector": "input[type='password']",
+        "text": "Senha123!@#",
+        "timeout": 5000
+      }
+    },
+    {
+      "id": "aguardar-preenchimento",
+      "type": "wait",
+      "params": {
+        "timeout": 500
+      }
+    },
+    {
+      "id": "captura-formulario",
+      "type": "screenshot",
+      "params": {
+        "name": "02-formulario-preenchido"
+      }
+    },
+    {
+      "id": "enviar-formulario",
+      "type": "click",
+      "params": {
+        "selector": "button[type=\"submit\"], button:has-text(\"Cadastrar\"), button:has-text(\"Registrar\")",
+        "timeout": 5000
+      }
+    },
+    {
+      "id": "aguardar-resposta",
+      "type": "wait",
+      "params": {
+        "timeout": 2000
+      }
+    },
+    {
+      "id": "captura-final",
+      "type": "screenshot",
+      "params": {
+        "name": "03-resultado-final"
+      }
+    }
+  ]
+}

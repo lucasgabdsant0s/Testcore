@@ -1,0 +1,163 @@
+{
+    "name": "Fluxo de Teste de Depósito com QR Code",
+    "config": {
+        "screenshotEnabled": false,
+        "screenshotInterval": 500
+    },
+    "blocks": [
+        {
+            "id": "inicio",
+            "type": "goto",
+            "params": {
+                "url": "https://slotpixpay.io",
+                "waitUntil": "domcontentloaded"
+            }
+        },
+        {
+            "id": "aguardar-carregamento",
+            "type": "wait",
+            "params": {
+                "timeout": 1000
+            }
+        },
+        {
+            "id": "clicar-login",
+            "type": "click",
+            "params": {
+                "selector": "a#entrarBtn2",
+                "timeout": 5000
+            }
+        },
+        {
+            "id": "aguardar-formulario-login",
+            "type": "wait",
+            "params": {
+                "timeout": 1500
+            }
+        },
+        {
+            "id": "clickar-preencher-telefone-login",
+            "type": "click",
+            "params": {
+                "selector": "#entrarModal2 input[type='tel']",
+                "timeout": 5000
+            }
+        },
+        {
+            "id": "preencher-telefone-login",
+            "type": "type",
+            "params": {
+                "selector": "#entrarModal2 input[type='tel']",
+                "text": "12981647076",
+                "timeout": 5000
+            }
+        },
+        {
+            "id": "aguardar-campo-senha",
+            "type": "wait",
+            "params": {
+                "timeout": 500
+            }
+        },
+        {
+            "id": "clickar-preencher-telefone-login",
+            "type": "click",
+            "params": {
+                "selector": "#entrarModal2 input[type='password']",
+                "timeout": 5000
+            }
+        },
+        {
+            "id": "preencher-senha-login",
+            "type": "type",
+            "params": {
+                "selector": "#entrarModal2 input[type='password']",
+                "text": "123",
+                "timeout": 5000
+            }
+        },
+        {
+            "id": "aguardar-preenchimento-senha-login",
+            "type": "wait",
+            "params": {
+                "timeout": 2000
+            }
+        },
+        {
+            "id": "enviar-formulario",
+            "type": "click",
+            "params": {
+                "selector": "#entrarModal2 button:has-text('Entrar')",
+                "timeout": 5000
+            }
+        },
+        {
+            "id": "aguardar-login",
+            "type": "wait",
+            "params": {
+                "timeout": 5000
+            }
+        },
+        {
+            "id": "clicar-depositar",
+            "type": "evaluate",
+            "params": {
+                "script": "document.querySelector('#depositBtnAuth').click();",
+                "timeout": 5000
+            }
+        },
+        {
+            "id": "aguardar-modal-deposito",
+            "type": "wait",
+            "params": {
+                "timeout": 1500
+            }
+        },
+        {
+            "id": "preencher-valor-deposito",
+            "type": "type",
+            "params": {
+                "selector": "input[type='number']",
+                "text": "50",
+                "timeout": 5000
+            }
+        },
+        {
+            "id": "aguardar-valor",
+            "type": "wait",
+            "params": {
+                "timeout": 500
+            }
+        },
+        {
+            "id": "confirmar-deposito",
+            "type": "click",
+            "params": {
+                "selector": "button[data-botao-deposito], button:has-text('Depositar')",
+                "timeout": 5000
+            }
+        },
+        {
+            "id": "aguardar-geracao-qrcode",
+            "type": "wait",
+            "params": {
+                "timeout": 3000
+            }
+        },
+        {
+            "id": "copiar-qrcode",
+            "type": "click",
+            "params": {
+                "selector": "button:has-text('Copiar Código')",
+                "timeout": 5000
+            }
+        },
+        {
+            "id": "aguardar-copia",
+            "type": "wait",
+            "params": {
+                "timeout": 500
+            }
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int              @id @default(autoincrement())
+  name            String
+  email           String           @unique
+  passwordHash    String
+  tests           Tests[]
+  monitoredSites  MonitoredSite[]
+  monitorLogs     MonitorLog[]
+  generatedPhones GeneratedPhone[]
+  createdAt       DateTime?        @default(now())
+  updatedAt       DateTime?        @default(now())
+}
+
+model Tests {
+  id        Int      @id @default(autoincrement())
+  name      String
+  json      Json
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MonitoredSite {
+  id        Int      @id @default(autoincrement())
+  url       String
+  nome      String
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user        User         @relation(fields: [userId], references: [id])
+  monitorLogs MonitorLog[]
+
+  @@index([userId])
+}
+
+model MonitorLog {
+  id             Int           @id @default(autoincrement())
+  siteId         Int
+  site           MonitoredSite @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  userId         Int
+  user           User          @relation(fields: [userId], references: [id])
+  status         String
+  responseTimeMs Int
+  createdAt      DateTime      @default(now())
+
+  @@index([siteId, createdAt])
+  @@index([userId])
+}
+
+model GeneratedPhone {
+  id          Int      @id @default(autoincrement())
+  phoneNumber String
+  testId      Int?
+  siteId      Int?
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([testId])
+  @@index([siteId])
+  @@index([createdAt])
+}
